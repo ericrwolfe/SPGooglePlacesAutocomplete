@@ -14,8 +14,8 @@
 #define kNSCodingKeyReference @"reference"
 #define kNSCodingKeyIdentifier @"id"
 #define kNSCodingKeyType @"type"
-#define kNSCodingKeyMatchedRangeLoc @"matchedRangeLoc"
-#define kNSCodingKeyMatchedRangeLen @"matchedRangeLen"
+#define kNSCodingKeyMatchedRangeLoc @"matchedRangeLocation"
+#define kNSCodingKeyMatchedRangeLen @"matchedRangeLength"
 #define kNSCodingKeyComponents @"components"
 
 @interface SPGooglePlacesAutocompletePlace()
@@ -106,7 +106,7 @@
     place.reference = [aDecoder decodeObjectForKey:kNSCodingKeyReference];
     place.identifier = [aDecoder decodeObjectForKey:kNSCodingKeyIdentifier];
     place.type = [aDecoder decodeIntForKey:kNSCodingKeyType];
-    place.matchedRange = NSMakeRange([aDecoder decodeIntForKey:kNSCodingKeyMatchedRangeLoc], [aDecoder decodeIntForKey:kNSCodingKeyMatchedRangeLen]);
+    place.matchedRange = NSMakeRange([[aDecoder decodeObjectForKey:kNSCodingKeyMatchedRangeLoc] unsignedIntegerValue], [[aDecoder decodeObjectForKey:kNSCodingKeyMatchedRangeLen] unsignedIntegerValue]);
     place.components = [aDecoder decodeObjectForKey:kNSCodingKeyComponents];
     return place;
 }
@@ -116,8 +116,8 @@
     [aCoder encodeObject:reference forKey:kNSCodingKeyReference];
     [aCoder encodeObject:identifier forKey:kNSCodingKeyIdentifier];
     [aCoder encodeInt:type forKey:kNSCodingKeyType];
-    [aCoder encodeInt:matchedRange.location forKey:kNSCodingKeyMatchedRangeLoc];
-    [aCoder encodeInt:matchedRange.length forKey:kNSCodingKeyMatchedRangeLen];
+    [aCoder encodeObject:[NSNumber numberWithUnsignedInteger:matchedRange.location] forKey:kNSCodingKeyMatchedRangeLoc];
+    [aCoder encodeObject:[NSNumber numberWithUnsignedInteger:matchedRange.length] forKey:kNSCodingKeyMatchedRangeLen];
     [aCoder encodeObject:components forKey:kNSCodingKeyComponents];
 }
 
