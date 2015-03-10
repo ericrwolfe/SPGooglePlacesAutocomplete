@@ -32,7 +32,7 @@
     self = [super init];
     if (self) {
         _location = placemark.location;
-        _region = placemark.region;
+        _region = (CLCircularRegion *)placemark.region;
         _addressDictionary = placemark.addressDictionary;
         _name = placemark.name;
         _thoroughfare = placemark.thoroughfare;
@@ -70,7 +70,7 @@
             CLLocationDistance radius = [northeast distanceFromLocation:southwest]/2.0;
             CLLocationCoordinate2D center = CLLocationCoordinate2DMake((northeast.coordinate.latitude+southwest.coordinate.latitude)/2.0, (northeast.coordinate.longitude+southwest.coordinate.longitude)/2.0);
             
-            _region = [[CLRegion alloc] initCircularRegionWithCenter:center radius:radius identifier:[NSString stringWithFormat:@"(%f, %f) Radius: %fm",center.latitude, center.longitude, radius]];
+            _region = [[CLCircularRegion alloc] initWithCenter:center radius:radius identifier:[NSString stringWithFormat:@"(%f, %f) Radius: %fm",center.latitude, center.longitude, radius]];
         }
         
         _name = placeDictionary[@"name"];

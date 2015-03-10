@@ -32,7 +32,7 @@
 /*!
  Returns the geographic region associated with the placemark.
  */
-@property (nonatomic, readonly) CLRegion *region;
+@property (nonatomic, readonly) CLCircularRegion *region;
 
 /*
  *  addressDictionary
