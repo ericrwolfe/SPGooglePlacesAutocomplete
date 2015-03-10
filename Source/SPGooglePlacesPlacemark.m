@@ -76,6 +76,8 @@
         _name = placeDictionary[@"name"];
         _addressString = placeDictionary[@"formatted_address"];
         
+        _placeTypes = placeDictionary[@"types"];
+
         for (NSDictionary *component in [placeDictionary[@"address_components"] reverseObjectEnumerator]) {
             
             NSArray *types = component[@"types"];

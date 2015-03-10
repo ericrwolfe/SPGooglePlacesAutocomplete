@@ -59,4 +59,7 @@
 @property (nonatomic, readonly) NSString *ocean; // eg. Pacific Ocean
 @property (nonatomic, readonly) NSArray *areasOfInterest; // eg. Golden Gate Park
 
+@property (nonatomic, readonly) NSArray *placeTypes; // eg. restaurant, aquarium, etc.: https://developers.google.com/places/documentation/supported_types
+
+
 @end
